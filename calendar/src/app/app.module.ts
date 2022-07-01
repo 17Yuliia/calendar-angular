@@ -3,11 +3,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarComponent } from './organizer/calendar/calendar.component';
 import { MomentPipe } from './pipes/moment.pipe';
-import { SelectorComponent } from './selector/selector.component';
-import { TodoComponent } from './todo/todo.component';
+import { SelectorComponent } from './organizer/selector/selector.component';
+import { TodoComponent } from './organizer/todo/todo.component';
 import { HttpClientModule } from '@angular/common/http';
+import { OrganizerComponent } from './organizer/organizer.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
     CalendarComponent,
     SelectorComponent,
     TodoComponent,
-    MomentPipe
+    MomentPipe,
+    OrganizerComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
