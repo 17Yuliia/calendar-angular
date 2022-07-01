@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --primary-color: #ea990e;
+    --grey-color: rgb(242, 242, 242);
+    --border-radius: 3px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;    
+    border-radius: var(--border-radius);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    background-color: var(--grey-color);
+    color: #333;
+    margin: 0 2rem;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+
+    &:hover {
+        color: #666;
+    }
+}
+
+ul {
+    list-style: none;
+}
+
+input {
+    display: block;
+    width: 100%;
+    padding: .5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: var(--border-radius);
+    margin-bottom: .5rem;
+}
+
+.container {
+    max-width: 800px;
+    min-width: 450px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0.2rem;
+}
+
+table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--grey-color);
+    color: black;
+    padding: 0.3rem .5rem;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    margin-right: .5rem;
+    transition: opacity .2s;
+    outline: none;
+    border-radius: var(--border-radius);
+
+    &:disabled {
+        background-color: var(--grey-color);
+        color: black;
+        cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+        opacity: .8;
+    }
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    padding: auto;
+}
+
+.text-center {
+    text-align: center;
+}
