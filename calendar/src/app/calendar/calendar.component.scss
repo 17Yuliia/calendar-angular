@@ -35,12 +35,12 @@ td {
     }
 }
 
-.active {
+.selected {
     font-weight: 700;
     background-color: var(--grey-color);
 }
 
-.selected {
+.active {
     font-weight: 700;
     color: var(--primary-color);
 }
