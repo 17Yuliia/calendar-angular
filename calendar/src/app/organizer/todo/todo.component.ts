@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { DateService } from '../../shared/date.service';
 import { TasksService, Task } from '../../shared/tasks.service';
 
@@ -30,7 +30,6 @@ export class TodoComponent implements OnInit, OnDestroy {
         })
 
         this.tasks$ = this.tasksService.tasks;
-        console.log(this.tasks$.value);
 
         this.form = this.formBuilder.group({
             title: ['', Validators.required],
@@ -42,7 +41,6 @@ export class TodoComponent implements OnInit, OnDestroy {
     }
 
     submit() {
-        console.log(this.tasks$.value.length)
         const { title } =  this.form.value;
 
         const task: Task = {

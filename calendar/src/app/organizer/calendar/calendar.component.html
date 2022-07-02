@@ -9,7 +9,7 @@
         <th>Sat</th>
     </thead>
     <tbody>
-        <tr *ngFor="let week of calendar">
+        <tr *ngFor="let week of (date$ | async)! | weeksOfMonth">
             <td 
                 *ngFor="let day of week.days"
                 [class.disabled]="day.disabled"

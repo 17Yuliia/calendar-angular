@@ -10,6 +10,7 @@ import { TodoComponent } from './organizer/todo/todo.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OrganizerComponent } from './organizer/organizer.component';
 import { HomeComponent } from './home/home.component';
+import { WeeksOfMonthPipe } from './pipes/weeks-of-month.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HomeComponent } from './home/home.component';
     TodoComponent,
     MomentPipe,
     OrganizerComponent,
-    HomeComponent
+    HomeComponent,
+    WeeksOfMonthPipe
   ],
   imports: [
     BrowserModule,
