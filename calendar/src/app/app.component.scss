@@ -1,3 +1,27 @@
-.header {
+section {
+    display: flex;
+}
+
+.content {
+    width: 100%;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+}
+
+a {
+    background-color: white;
+    color: var(--primary-color);
+    text-decoration: none;
+    margin: 0.5rem;
     padding: 0.5rem;
+    box-shadow: 2px 2px 2px 0px #0000000d;
+    font-size: bold;
+
+    &:hover {
+        font-weight: bold;
+    }
 }

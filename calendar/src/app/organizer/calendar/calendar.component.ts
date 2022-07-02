@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { DateService } from '../shared/date.service';
+import { DateService } from '../../shared/date.service';
 
 interface Day {
 	value: moment.Moment,
@@ -16,7 +16,8 @@ interface Week {
 @Component({
 	selector: 'app-calendar',
 	templateUrl: './calendar.component.html',
-	styleUrls: ['./calendar.component.scss']
+	styleUrls: ['./calendar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent implements OnInit {
 

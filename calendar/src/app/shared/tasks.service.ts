@@ -1,8 +1,7 @@
-import { keyframes } from "@angular/animations";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import * as moment from "moment";
-import { map, Observable } from "rxjs";
+import { BehaviorSubject, map, Observable } from "rxjs";
 
 export interface Task {
     id?: string,
@@ -18,38 +17,46 @@ interface Response {
     providedIn: 'root'
 })
 export class TasksService {
-    static url = 'https://calculator-angular-practice-default-rtdb.firebaseio.com/tasks';
+    url = 'https://calculator-angular-practice-default-rtdb.firebaseio.com/tasks';
 
-    headers = new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
-    })
+    public tasks: BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>([]);
     
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient) { }
 
+    load(date: moment.Moment) {
+        this.http.get<Task[]>(`${this.url}/${date.format('DD-MM-YYYY')}.json`)
+            .pipe(map(res => {
+                if (!res) {
+                    return [];
+                }
+                
+                return (Object.keys(res).map((key: any) => ({...res[key], id: key})))
+            }))
+            .subscribe(tasks => {
+                this.tasks.next(tasks);
+            })
     }
 
-    load(date: moment.Moment):Observable<Task[]> {
-        return this.http.get<Task[]>(`${TasksService.url}/${date.format('DD-MM-YYYY')}.json`)
-        .pipe(map(tasks => {
-            if (!tasks) {
-                console.log('return')
-                return []
-            }
-            console.log(tasks)
-
-            return Object.keys(tasks).map((key: any) => ({...tasks[key], id: key}))
-        }))
+    create(task: Task) {
+        this.http.post<Response>(`${this.url}/${task.date}.json`, task)
+        .pipe(map(res => ({...task, id: res.name})))
+        .subscribe({
+            next: task => {
+                this.tasks.value.push(task);
+                this.tasks.next(this.tasks.value);
+            },
+            error: err => console.error(err)
+        })
     }
 
-    create(task: Task): Observable<Task> {
-        return this.http.post<Response>(`${TasksService.url}/${task.date}.json`, task)
-        .pipe(map(res => {
-            console.log(res)
-            return {...task, id: res.name};
-        }))
-    }
-
-    remove(task: Task):Observable<void> {
-        return this.http.delete<void>(`${TasksService.url}/${task.date}/${task.id}.json`)
+    remove(task: Task) {
+        this.http.delete<void>(`${this.url}/${task.date}/${task.id}.json`)
+        .subscribe({
+            next: () => {
+                const filtered = this.tasks.value.filter(t => t.id !== task.id);
+                this.tasks.next(filtered);
+            },
+            error: err => console.error(err)
+        })
     }
 }
