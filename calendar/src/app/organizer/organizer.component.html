@@ -1,11 +1,11 @@
 <div class="container">
 	<header class="header">
-		<app-selector [date$]="date$" (changeMonthEvent)="changeMonth($event)"></app-selector>
+		<organizer-selector [date$]="date$" (changeMonthEvent)="changeMonth($event)"></organizer-selector>
 	</header>
 	<main class="wrapper">
-		<app-calendar [date$]="date$" (changeDateEvent)="changeDate($event)"></app-calendar>
+		<organizer-calendar [date$]="date$" (changeDateEvent)="changeDate($event)"></organizer-calendar>
 	</main>
 	<div class="wrapper">
-		<app-todo [date$]="date$"></app-todo>
+		<organizer-todo [date$]="date$"></organizer-todo>
 	</div>
 </div>

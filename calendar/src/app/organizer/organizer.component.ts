@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
-import { DateService } from '../shared/date.service';
+import { DateService } from './shared/date.service';
 
 @Component({
 	selector: 'app-organizer',
@@ -33,6 +33,11 @@ export class OrganizerComponent implements OnInit {
 	getDateFromUrl(): void {
 		this.route.paramMap.subscribe(params => {
 			const date = params.get('date');
+
+			if (date === this.date$.value.format('DD-MM-YYYY')) {
+				return;
+			}
+			
 			date && this.date$.next(moment(date, 'DD-MM-YYYY'));
 		});
 	}

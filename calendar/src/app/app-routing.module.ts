@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OrganizerComponent } from './organizer/organizer.component';
 import { HomeComponent } from './home/home.component';
-import { TodoComponent } from './organizer/todo/todo.component';
-import * as moment from 'moment';
+import { PreloadAllModules } from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
 	{
@@ -11,23 +11,31 @@ const routes: Routes = [
 		component: HomeComponent
 	},
 	{
-		path: 'organizer/:date',
-		component: OrganizerComponent
-	},
-	{
 		path: 'organizer',
-		redirectTo: `organizer/${moment().format('DD-MM-YYYY')}`,
-		pathMatch: 'full'
+		canActivate: [AuthGuard],
+		loadChildren: () => import('./organizer/organizer.module').then(m => m.OrganizerModule)
 	},
 	{
 		path: '',
 		redirectTo: 'home',
 		pathMatch: 'full'
 	},
+	{ path: 'calculator', loadChildren: () => import('./calculator/calculator.module').then(m => m.CalculatorModule) },
+	{
+		path: '**',
+		component: PageNotFoundComponent
+	}
 ]
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
+	imports: [
+		RouterModule.forRoot(
+			routes, 
+			{
+				preloadingStrategy: PreloadAllModules
+			}
+		)
+	],
 	exports: [RouterModule]
 })
 export class AppRoutingModule { }

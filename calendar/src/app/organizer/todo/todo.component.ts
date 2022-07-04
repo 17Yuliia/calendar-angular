@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TasksService, Task } from '../../shared/tasks.service';
+import { TasksService, Task } from '../shared/tasks.service';
 import { BehaviorSubject } from 'rxjs';
 import * as moment from 'moment';
 
 @Component({
-	selector: 'app-todo',
+	selector: 'organizer-todo',
 	templateUrl: './todo.component.html',
 	styleUrls: ['./todo.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -24,8 +24,8 @@ export class TodoComponent implements OnInit {
     date$: BehaviorSubject<moment.Moment> = new BehaviorSubject<moment.Moment>(moment());
     
 	ngOnInit(): void {  
-        this.date$.subscribe(observer => {
-            this.tasksService.load(observer);
+        this.date$.subscribe(date => {
+            this.tasksService.load(date);
         })
 
         this.tasks$ = this.tasksService.tasks;

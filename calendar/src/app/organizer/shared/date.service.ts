@@ -21,6 +21,7 @@ export class DateService {
             date: date.date(),
             month: date.month(),
         })
+        // is it okey?
 
         this.date.next(value);
     }
