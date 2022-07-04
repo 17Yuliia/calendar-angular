@@ -1,11 +1,10 @@
 <section>
     <header class="text-center">
         Tasks for 
-        <strong>{{ (dateService.date | async)! | moment: 'DD.MM.YYYY' }}</strong>
+        <strong>{{ (date$ | async)! | moment: 'DD.MM.YYYY' }}</strong>
     </header>
     <main>
         <ul *ngIf="(tasks$ | async)?.length!==0; else noTasks">
-        <!-- <ul> -->
             <li class="task" *ngFor="let task of tasks$ | async">
                 <input type="checkbox">
                 <p>
