@@ -1,29 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OrganizerComponent } from './organizer/organizer.component';
 import { HomeComponent } from './home/home.component';
-import { TodoComponent } from './organizer/todo/todo.component';
-import * as moment from 'moment';
-
 const routes: Routes = [
 	{
 		path: 'home',
 		component: HomeComponent
 	},
 	{
-		path: 'organizer/:date',
-		component: OrganizerComponent
-	},
-	{
 		path: 'organizer',
-		redirectTo: `organizer/${moment().format('DD-MM-YYYY')}`,
-		pathMatch: 'full'
+		loadChildren: () => import('./organizer/organizer.module').then(m => m.OrganizerModule)
 	},
 	{
 		path: '',
 		redirectTo: 'home',
 		pathMatch: 'full'
 	},
+	{ path: 'calculator', loadChildren: () => import('./calculator/calculator.module').then(m => m.CalculatorModule) },
 ]
 
 @NgModule({

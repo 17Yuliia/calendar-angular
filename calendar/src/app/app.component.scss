@@ -23,7 +23,7 @@ a {
     box-shadow: 2px 2px 2px 0px #0000000d;
     font-size: bold;
 
-    &:hover {
+    &:hover, &:focus, &:active {
         font-weight: bold;
     }
 }

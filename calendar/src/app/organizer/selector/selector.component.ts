@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import * as moment from 'moment';
 
 @Component({
-	selector: 'app-selector',
+	selector: 'organizer-selector',
 	templateUrl: './selector.component.html',
 	styleUrls: ['./selector.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
