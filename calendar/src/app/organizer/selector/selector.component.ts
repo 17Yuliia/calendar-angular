@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DateService } from '../../shared/date.service';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'app-selector',
@@ -9,10 +10,15 @@ import { DateService } from '../../shared/date.service';
 })
 export class SelectorComponent {
 
-	constructor(protected dateService: DateService) { }
+	constructor() { }
+
+	@Input()
+    date$: BehaviorSubject<moment.Moment> = new BehaviorSubject<moment.Moment>(moment());
+
+	@Output()
+	changeMonthEvent: EventEmitter<number> = new EventEmitter<number>();
 
 	go(dir: number) {
-		this.dateService.changeMonth(dir);
+		return this.changeMonthEvent.emit(dir);
 	}
-
 }

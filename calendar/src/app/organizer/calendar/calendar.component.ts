@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { DateService } from '../../shared/date.service';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'app-calendar',
@@ -9,17 +8,17 @@ import { DateService } from '../../shared/date.service';
 	styleUrls: ['./calendar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent {
 
-	constructor(protected dateService: DateService) { }
+	constructor( ) { }
 
+    @Input()
     date$: BehaviorSubject<moment.Moment> = new BehaviorSubject<moment.Moment>(moment());
 
-	ngOnInit(): void {	
-        this.date$ = this.dateService.date;
-    }    
+    @Output()
+    changeDateEvent: EventEmitter<moment.Moment> = new EventEmitter<moment.Moment>();
 
     selectDay(day: moment.Moment) {
-        this.dateService.changeDate(day);
+        return this.changeDateEvent.emit(day);
     }
 }
